@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     @Bind(R.id.goButton)Button goButton;
-    public int[] a = new int[]{4,6,2,8,9,5,7,1,3};
+    public int[] a = new int[]{4,6,2,22,8,9,79,5,7,1,3,14};
     private Map<Integer, Integer> map = new HashMap<>(a.length);
     private boolean conditionSmallData;
     private boolean condition;
@@ -61,6 +61,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     conditionSmallData = true;
                 }
             } else {
+                Log.d("value of sum", "is NOT equal to 10");
+                Log.d("return int1", String.valueOf(int1));
+                Log.d("return int2", String.valueOf(int2));
+                Log.d("return sum", String.valueOf(int1 + int2));
                 conditionSmallData = false;
             }
         }
