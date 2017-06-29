@@ -6,12 +6,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.lang.reflect.Array;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.IntStream;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     @Bind(R.id.goButton)Button goButton;
     public int[] a = new int[]{4,5,6};
+    private Map<Integer, Integer> map = new HashMap<>(a.length);
     private boolean condition;
     private boolean conditionShort;
 
@@ -22,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ButterKnife.bind(this);
         goButton.setOnClickListener(this);
+        createMap();
     }
 
     private void solveBrainTeaserLong(){
@@ -41,33 +48,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void createMap() {
+        for (Integer mapping : a)
+        {
+            map.put(mapping, mapping);
+            Log.d("mapContents", String.valueOf(map));
+        }
+        Log.d("mapContents", String.valueOf(map));
+    }
+
     private void solveShort(){
-        Log.d("Short", "started");
-        int g = 0;
-        for (int w = 0; w < a.length; w++){
-                int b = a.length - 1;
-                int f = b - g;
-            if (a[w] + a[f] != 10){
-                g = g + 1;
-                conditionShort = false;
-                Log.d("return a[w]", String.valueOf(a[w]));
-                Log.d("return a[f]", String.valueOf(a[f]));
-                Log.d("return total", String.valueOf(a[w]+a[f]));
-                Log.d("condition met", String.valueOf(conditionShort));
+        for(int v = 0; v < map.size(); v++){
+            int int1;
+            int int2;
+            int1 = map.get(a[v]);
+            int2 = (int1 - 10)*-1;
+            if (map.containsValue(int2)){
+                Log.d("value of sum", "is equal to 10");
+                Log.d("return int1", String.valueOf(int1));
+                Log.d("return int2", String.valueOf(int2));
+                Log.d("return sum", String.valueOf(int1 + int2));
             } else {
-                if (w < 0){
-                    w--;
-                } else {
-                    w = 0;
-                }
-                conditionShort = true;
-                Log.d("return a[w]", String.valueOf(a[w]));
-                Log.d("return a[f]", String.valueOf(a[f]));
-                Log.d("return total", String.valueOf(a[w]+a[f]));
-                Log.d("condition met", String.valueOf(conditionShort));
+                Log.d("value of sum", "is NOT equal to 10");
+                Log.d("return int1", String.valueOf(int1));
+                Log.d("return int2", String.valueOf(int2));
+                Log.d("return sum", String.valueOf(int1 + int2));
             }
         }
     }
+
+
 
     @Override
     public void onClick(View v){
